@@ -2,7 +2,7 @@
 const first = require('discord.js');
 const client = new first.Client();
 var dict = require('./dict.json');
-var dicta = {};
+var dicta = require('./dicta.json');
 //Copy paste bot token in empty quotes
 client.login('')
 client.on('ready', ready);
