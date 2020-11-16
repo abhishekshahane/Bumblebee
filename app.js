@@ -4,7 +4,7 @@ const client = new first.Client();
 var dict = require('./dict.json');
 var dicta = {};
 //Copy paste bot token in empty quotes
-client.login('Nzc3Nzc5MjcyOTk4NzE1NDEz.X7IZZQ.5Z18MKScODCD16tSxm73bIq7LMY')
+client.login('')
 client.on('ready', ready);
 function ready(){
     console.log("Alright, we are ready!")
