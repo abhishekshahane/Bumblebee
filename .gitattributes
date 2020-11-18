@@ -1,1 +1,2 @@
 *.jsonc linguist-language=Typescript
+*.json linguist-language=Typescript
