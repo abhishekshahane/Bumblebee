@@ -16,7 +16,7 @@ function call(msg){
     var f =0;
     if (msg.channel.name == undefined){
         if (f==0 && !msg.author.bot){
-            msg.reply("Sorry, we bots don't respond to DM's. Try adding me to a server if you want to speak to me.")
+            msg.reply("Sorry, us bots don't respond to DM's. Try adding me to a server if you want to speak to me.")
             f=1;
         }
     }
@@ -29,6 +29,14 @@ function call(msg){
             xp[msg.author.discriminator] = Math.floor(Math.random() * (15 - 10) + 10);
             dict[msg.author.discriminator] = 0;
             dicta[msg.author.discriminator] = msg.author.username;
+            //Gets server id from message, and uses that in server name
+            var ida = msg.channel.guild.id;
+            var serverName = client.guilds.cache.get(`${ida}`).name;
+            console.log(serverName)
+            var person = dicta[msg.author.discriminator];
+            if (!msg.author.bot){
+                msg.author.send(`Welcome to ${serverName}, ${person}!`)
+            }
         }
         if (msg.content==='--check'){
             msg.channel.send("Returning JSON data......");
@@ -37,10 +45,19 @@ function call(msg){
             }
         }
         else if(msg.content.startsWith("--xp")){
-            //var strsplit = msg.content.split(" ");
-            //console.log(strsplit[0])
-            var get = msg.mentions.users.first().discriminator;
-            msg.channel.send(`${dicta[get]} : ${xp[get]}`)
+            var strsplit = msg.content.split(" ");
+            if (strsplit.length===2){
+                var get = msg.mentions.users.first().discriminator;
+                if (dicta[get]===undefined){
+                    msg.channel.send("This user has not said anything yet, so their XP is 0.")
+                }
+                else{
+                    msg.channel.send(`${dicta[get]} : ${xp[get]}`)
+                }
+            }
+            else{
+                msg.channel.send("The syntax of your command is incorrect. Please follow the format --xp @[USER].")
+            }
         }
     }
     
