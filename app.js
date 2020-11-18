@@ -1,8 +1,8 @@
 //require the discord api
 const first = require('discord.js');
 const client = new first.Client();
-var dict = require('./dict.json');
-var dicta = require('./dicta.json');
+var dict = require('./dict.jsonc');
+var dicta = require('./dicta.jsonc');
 var xp = {};
 //Copy paste bot token in empty quotes
 client.login('')
