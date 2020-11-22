@@ -46,7 +46,6 @@ async function call(msg){
             //Gets server id from message, and uses that in server name
             var ida = msg.channel.guild.id;
             var serverName = client.guilds.cache.get(`${ida}`).name;
-            console.log(serverName);
             var person = dicta[msg.author.discriminator];
             if (!msg.author.bot){
                 msg.author.send(`Welcome to ${serverName}, ${person}!`);
