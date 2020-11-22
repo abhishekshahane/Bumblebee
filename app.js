@@ -1,18 +1,27 @@
-//require the discord api
-const first = require('discord.js');
-const client = new first.Client();
+//Require modules here.
+const Discord = require('discord.js');
 const fetch = require('node-fetch');
+
+//require otherfiles here.
 var dict = require('./dict.jsonc');
 var dicta = require('./dicta.jsonc');
+
+//Creates a client.
+const client = new Discord.Client();
+
+//set variables here.
 var xp = {};
 const prefix = '--' 
-//Copy paste bot token in empty quotes
+
+//Copy paste bot token in empty quotes.
 client.login('')
-client.on('ready', ready);
-function ready(){
-    console.log("Alright, we are ready!")
-    client.user.setActivity("Drinking Water!💧💦")
-};
+
+//Executes when the bot is ready.
+client.once('ready', () => {
+    console.log('Ready');
+    client.user.setActivity('Drinking Water!💧💦');
+});
+
 //Call is working
 function call(msg){
     var f =0;
@@ -26,12 +35,12 @@ function call(msg){
             msg.reply("Sorry, us bots don't respond to DM's. Try adding me to a server if you want to speak to me.");
             f=1;
         };
-    };
+    }
     else{
         if (dict[msg.author.discriminator]>=0){
             dict[msg.author.discriminator]+=1;
             xp[msg.author.discriminator]+=Math.floor(Math.random()*(15-10)+10);
-        };
+        }
         else if(dict.hasOwnProperty(msg.author.discriminator)!=true){
             xp[msg.author.discriminator] = Math.floor(Math.random() * (15 - 10) + 10);
             dict[msg.author.discriminator] = 0;
@@ -57,7 +66,7 @@ function call(msg){
                 var get = msg.mentions.users.first().discriminator;
                 if (dicta[get]===undefined){
                     msg.channel.send("This user has not said anything yet, so their XP is 0.");
-                };
+                }
                 else{
                     msg.channel.send(`${dicta[get]} : ${xp[get]}`);
                 };
