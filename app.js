@@ -3,20 +3,23 @@
 const ENV=require('dotenv');
 ENV.config()
 const first = require('discord.js');
-const client = new first.Client();
+const Discord = require('discord.js');
 const fetch = require('node-fetch');
 var dict = require('./dict.jsonc');
 var dicta = require('./dicta.jsonc');
+//Creates a client.
+const client = new Discord.Client();
 
 var xp = {};
 const prefix = '--' 
 //Copy paste bot token in empty quotes
 client.login(`${process.env.TOKEN}`)
-client.on('ready', ready);
-function ready(){
-    console.log("Alright, we are ready!")
-    client.user.setActivity("Drinking Water!💧💦")
-};
+//Executes when the bot is ready.
+client.once('ready', () => {
+    console.log('Ready');
+    client.user.setActivity('Drinking Water!💧💦');
+});
+
 //Call is working
 async function call(msg){
     var f =0;
