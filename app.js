@@ -65,7 +65,7 @@ function call(msg){
                 }
             }
             else{
-                
+                msg.channel.send("The syntax of your command is incorrect. Please follow the format --xp @[USER].")
             }
         }
     }
