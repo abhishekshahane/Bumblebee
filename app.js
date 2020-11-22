@@ -1,33 +1,28 @@
-//Require modules here.
-const Discord = require('discord.js');
+  
+//require the discord api
+const ENV=require('dotenv');
+ENV.config()
+const first = require('discord.js');
+const client = new first.Client();
 const fetch = require('node-fetch');
-
-//require otherfiles here.
 var dict = require('./dict.jsonc');
 var dicta = require('./dicta.jsonc');
 
-//Creates a client.
-const client = new Discord.Client();
-
-//set variables here.
 var xp = {};
 const prefix = '--' 
-
-//Copy paste bot token in empty quotes.
-client.login('')
-
-//Executes when the bot is ready.
-client.once('ready', () => {
-    console.log('Ready');
-    client.user.setActivity('Drinking Water!💧💦');
-});
-
+//Copy paste bot token in empty quotes
+client.login(`${process.env.TOKEN}`)
+client.on('ready', ready);
+function ready(){
+    console.log("Alright, we are ready!")
+    client.user.setActivity("Drinking Water!💧💦")
+};
 //Call is working
-function call(msg){
+async function call(msg){
     var f =0;
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!msg.content.startsWith(prefix) || msg.author.bot) return;
     
-    const args = message.content.slice(prefix.length).trim().split(' ');
+    const args = msg.content.slice(prefix.length).trim().split(' ');
     const command = args.shift().toLowerCase();
     
     if (msg.channel.name == undefined){
@@ -76,7 +71,7 @@ function call(msg){
             };
         } else if (command === 'joke') {
               let joke = await getJoke()
-              message.channel.send(`${joke.setup}\n||${joke.punchline}||`)
+              msg.channel.send(`${joke.setup}\n||${joke.punchline}||`)
         };
     };
     
