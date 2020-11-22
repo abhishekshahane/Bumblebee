@@ -44,6 +44,9 @@ function call(msg){
                 msg.channel.send(`${dicta[key]} : ${dict[key]+1}`)
             }
         }
+        else if(msg.content.startsWith("!joke"){
+                //Put your code here
+        }
         else if(msg.content.startsWith("--xp")){
             var strsplit = msg.content.split(" ");
             if (strsplit.length===2){
