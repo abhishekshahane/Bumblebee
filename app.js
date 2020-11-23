@@ -47,20 +47,7 @@ function ready(){
 //Call is working
 /*async function call(msg){
 
-    var f =0;
-
-    if (msg.author.bot) return;
-    
-    const args = msg.content.slice(prefix.length).trim().split(' ');
-    const command = args.shift().toLowerCase();
-    
-    if (!msg.guild) {
-        if (f==0 && !msg.author.bot){
-            msg.reply("Sorry, us bots don't respond to DM's. Try adding me to a server if you want to speak to me.");
-            f=1;
-        };
     }
-  //TODO: remove dict.jsonc dicta.jsonc, and integrate db with it
   
     else{
         if (dict[msg.author.id]>=0){
@@ -107,7 +94,7 @@ function ready(){
 }
 */
 async function main(msg){
-    if (!msg.channel.type=='dm'){
+    if (!msg.channel.type=='dm'||!msg.guild){
         msg.channel.send('This bot does not respond to DMs.\n Please send your command in a server')
     }else{
     if (msg.content.startsWith(prefix)){
@@ -117,10 +104,16 @@ async function main(msg){
                 CommandHandler.xp(msg,dictionary,args);
             break;
             case 'check': 
-                CommandHandler.check(msg,dictionary,args);
+                CommandHandler.check(msg,dictionary,args,'message');
             break;
             case 'joke':
-                CommandHandler.joke(msg,dictionary,args);
+                CommandHandler.joke(msg,client);
+            case 'meme':
+                CommandHandler.meme(msg,client,Discord);
+            break;
+            case 'role':
+                CommandHandler.role(msg,client);
+            break;
             default:
                 msg.channel.send("That is not a valid command.")
 
