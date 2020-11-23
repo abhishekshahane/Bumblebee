@@ -2,19 +2,24 @@
 
 const Discord = require('discord.js');
 const fetch = require('node-fetch');
-const fs = require('fs')
-const database = require('quick.db')
+const fs = require('fs');
+const database = require('quick.db');
+const dotenv = require('dotenv');
+
+
+
+dotenv.config({ path: './.env'});
 //Creates a client.
 const client = new Discord.Client();
 
 var CommandHandler = require('./commands/commands');
 
-dictionary = fs.readFileSync('./dictionary.json','utf8');
-dictionary = JSON.parse(dictionary);
-function createUserObject(id, xp, server){
+var dictionary = database.get('main'); 
+function user(id, xp, server){
  this.id = id;
  this.server = server;
  this.xp = xp; 
+ 
 } 
 const prefix = '--';
 
@@ -24,10 +29,9 @@ function writeUser(id,xp,server){
     dictionary.ids.push(id);
 }
 function saveDB(){
-    fs.writeFile('dictionary.json',dictionary, function (err) {
-        if (err) throw err;
-        console.log('Saved db');
-      });
+      database.set('main.users',dictionary.users);
+      database.set('main.ids',dictionary.ids);
+
 }
 
 setInterval(saveDB,10000);
@@ -102,7 +106,7 @@ function ready(){
     
 }
 */
-function main(msg){
+async function main(msg){
     if (!msg.channel.type=='dm'){
         msg.channel.send('This bot does not respond to DMs.\n Please send your command in a server')
     }else{
@@ -133,7 +137,7 @@ function main(msg){
 
 client.on('message', main);
 
-        
+client.login(process.env.TOKEN);
     
 
 
