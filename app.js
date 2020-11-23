@@ -44,7 +44,7 @@ async function main(msg){
         msg.channel.send('This bot does not respond to DMs.\n Please send your command in a server')
     }else{
     if (msg.content.startsWith(prefix)){
-        let args = msg.content.substring(prefix.length).split('');
+        let args = msg.content.substring(prefix.length).split(' ');
         switch (args[0]){
             case 'xp' :
                 CommandHandler.xpGet(msg,dictionary,args);
