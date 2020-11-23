@@ -1,13 +1,17 @@
 //require the discord api
-const first = require('discord.js');
-const client = new first.Client();
-const fs = require('fs');
+
+const Discord = require('discord.js');
+const fetch = require('node-fetch');
+const fs = require('fs')
+const database = require('quick.db')
+//Creates a client.
+const client = new Discord.Client();
 
 var CommandHandler = require('./commands/commands');
 
 dictionary = fs.readFileSync('./dictionary.json','utf8');
 dictionary = JSON.parse(dictionary);
-function userObject(id, xp, server){
+function createUserObject(id, xp, server){
  this.id = id;
  this.server = server;
  this.xp = xp; 
@@ -34,15 +38,26 @@ function ready(){
     console.log("Alright, we are ready!")
     client.user.setActivity("Drinking Water!💧💦")
 }
-/*/Call is working
-function call(msg){
+
+
+//Call is working
+/*async function call(msg){
+
     var f =0;
-    if (msg.channel.name == undefined){
+
+    if (msg.author.bot) return;
+    
+    const args = msg.content.slice(prefix.length).trim().split(' ');
+    const command = args.shift().toLowerCase();
+    
+    if (!msg.guild) {
         if (f==0 && !msg.author.bot){
-            msg.reply("Sorry, us bots don't respond to DM's. Try adding me to a server if you want to speak to me.")
+            msg.reply("Sorry, us bots don't respond to DM's. Try adding me to a server if you want to speak to me.");
             f=1;
-        }
+        };
     }
+  //TODO: remove dict.jsonc dicta.jsonc, and integrate db with it
+  
     else{
         if (dict[msg.author.id]>=0){
             dict[msg.author.id]+=1;
@@ -55,6 +70,7 @@ function call(msg){
             //Gets server id from message, and uses that in server name
             var ida = msg.channel.guild.id;
             var serverName = client.guilds.cache.get(`${ida}`).name;
+
             console.log(serverName)
             var person = dicta[msg.author.id];
             if (!msg.author.bot){
@@ -108,7 +124,7 @@ function main(msg){
         }
 
     } else {
-        
+        //xp giving thing here
         return;
     }
 }
@@ -117,4 +133,7 @@ function main(msg){
 
 client.on('message', main);
 
-client.login();
+        
+    
+
+
