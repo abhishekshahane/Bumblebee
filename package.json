@@ -11,8 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.5.0",
-    "quick.db": "^7.1.2",
-    "memejs": "^1.2.3"
+    "dotenv": "^8.2.0",
+    "memejs": "^1.2.3",
+    "quick.db": "^7.1.2"
   },
   "engines": {
     "node": "12.x"
