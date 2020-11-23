@@ -18,7 +18,7 @@ function userObject(id, xp, server){
    } 
 
 exports.check = (msg,dictionary,args,intent) => {
-    if(dictionary.ids.contains(msg.author.id)){
+    if(dictionary.ids.includes(msg.author.id)){
         let userObject = finduserinDB(dictionary,msg.author.id);
         if(intent="message"){
             msg.channel.send('User is in database:');
