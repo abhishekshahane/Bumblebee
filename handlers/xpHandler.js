@@ -12,6 +12,7 @@ if(check(msg,dictionary,null,'check')&& randomNumber(0,3) == 2){
 } else if(!check(msg,dictionary,null,'check')) {
     
     addUser(msg,dictionary);
+    msg.channel.send('Welcome to the Server, '+msg.author.tag);
 }
 }
 
