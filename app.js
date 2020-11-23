@@ -1,18 +1,32 @@
 //require the discord api
 const first = require('discord.js');
 const client = new first.Client();
-var dict = require('./dict.jsonc');
-var dicta = require('./dicta.jsonc');
+const fs = require('fs');
+
 var CommandHandler = require('./commands/commands');
-var dictionary = {
-    users = [],
-    ids = []
-}
-function userObject(id, xp){
+
+dictionary = fs.readFileSync('./dictionary.json','utf8');
+dictionary = JSON.parse(dictionary);
+function userObject(id, xp, server){
  this.id = id;
+ this.server = server;
  this.xp = xp; 
 } 
 const prefix = '--';
+
+function writeUser(id,xp,server){
+    let user = new userObject(id,xp,server);
+    dictionary.users.push(user);
+    dictionary.ids.push(id);
+}
+function saveDB(){
+    fs.writeFile('dictionary.json',dictionary, function (err) {
+        if (err) throw err;
+        console.log('Saved db');
+      });
+}
+
+setInterval(saveDB,10000);
 
 //Copy paste bot token in empty quotes
 client.on('ready', ready);
@@ -73,8 +87,11 @@ function call(msg){
 }
 */
 function main(msg){
+    if (!msg.channel.type=='dm'){
+        msg.channel.send('This bot does not respond to DMs.\n Please send your command in a server')
+    }else{
     if (msg.content.startsWith(prefix)){
-        let args = msg.content.substring(1).split('');
+        let args = msg.content.substring(prefix.length).split('');
         switch (args[0]){
             case 'xp' :
                 CommandHandler.xp(msg,dictionary,args);
@@ -91,11 +108,13 @@ function main(msg){
         }
 
     } else {
+        
         return;
     }
+}
 }
 
 
 client.on('message', main);
 
-client.login('Nzc3Nzc5MjcyOTk4NzE1NDEz.X7IZZQ.a-1jFit4CoRnmvJrAFZA6ZXgZyk');
+client.login();
