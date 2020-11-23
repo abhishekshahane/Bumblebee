@@ -4,11 +4,17 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Abhishek Shahane",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.4.1"
+    "discord.js": "^12.5.0",
+    "quick.db": "^7.1.2",
+    "memejs": "^1.2.3"
+  },
+  "engines": {
+    "node": "12.x"
   }
 }
