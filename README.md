@@ -1,5 +1,5 @@
 # Bumblebee
-A simple discord bot that counts messages each user has sent. I made this to practice using the Discord API and JS.
+A discord bot that counts messages each user has sent. I made this with Nightcry1, MrNNP and Weeyan.
 To run:
 1. Install dependecies such as discord.js and add the bot token.
 2. Add the bot to a server from the link provided in the txt file.
