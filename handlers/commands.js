@@ -1,35 +1,18 @@
 const fetch = require('node-fetch');
-const { meme } = require('memejs')
+const { meme } = require('memejs');
+const userMethods = require('./users');
 
 const role = require('./role');
 
-exports.check = function check(msg,dictionary,args, intent){
-if(dictionary.ids.contains(msg.author.id)){
-    let userObject = finduserinDB(dictionary,msg.author.id);
-    if(intent="message"){
-        msg.channel.send('User is in database:');
-        msg.channel.send('User xp is '+userObject.xp);
-    }
-  else if(intent = 'get'){
-    return userObject;
-
-    }
-  else if(intent = 'check'){
-    return true;
-  }
-} else if(intent = 'check'){
-    return false; 
-} else if(intent = 'get'){
-    throw new Error; 
-}   
-
+exports.check = (msg,dictionary,args,intent) => {
+    userMethods.check(msg,dictionary,args,intent);
 };
-exports.xp = function xp(msg,dictionary, args){
+exports.xpGet = function xp(msg,dictionary, args){
     if(args[1]){
         try {
             
             var mentioned = msg.mentions.users.first().id;
-            let userObject = finduserinDB(dictionary,mentioned);
+            let userObject = userMethods.finduserinDB(dictionary,mentioned);
             if (dictionary.userObject.xp == 0){
                 msg.channel.send("This user has not said anything yet, so their XP is 0.")
             }
@@ -71,10 +54,7 @@ exports.meme = async (msg, client, Discord) => {
 exports.role =  (message, client) =>{
     role.role(message,client);
 }
-function finduserinDB(dictionary,id){
-   return dictionary.users[dictionary.ids.indexOf(id)];
 
-}
 
 let getJoke = async () => {
     
