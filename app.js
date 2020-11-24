@@ -1,85 +1,79 @@
-//require the discord api
+//Require modules here.
+const Discord = require("discord.js");
+const fetch = require("node-fetch");
+const fs = require("fs");
+const db = require("quick.db");
 
-const Discord = require('discord.js');
-const fetch = require('node-fetch');
-const fs = require('fs');
+//Set variables here
+var xp = {};
+const prefix = "--";
 
-const dotenv = require('dotenv');
-
-
-
-dotenv.config({ path: './.env'});
-//Creates a client.
-const client = new Discord.Client();
-
-var CommandHandler = require('./handlers/commands');
-const { xp } = require('./handlers/xpHandler');
-
-var database = fs.readFileSync('./database.json','utf8');
-database = JSON.parse(database);
-
-const prefix = '--';
+const client = new Discord.Client(); //Creates the client.
 
 
+client.login(`${process.env.TOKEN}`); //Starts the bot.
 
-function saveDB(){
-    fs.writeFile('database.json',database, function (err) {
-        if (err) throw err;
-        console.log('Saved db');
-      });
+client.commands = new Discord.Collection(); //Saves the commands in a collection.
+
+const commandFiles = fs
+  .readdirSync("/app/commands/")
+  .filter(File => File.endsWith(".js"));
+
+for (const File of commandFiles) {
+  let command;
+  try {
+    command = require(`/app/commands/${File}`);
+    client.commands.set(command.name, command);
+    console.log(`${command.name} is ready`);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-setInterval(saveDB,10000);
+//Put events here.
 
-//Copy paste bot token in empty quotes
-client.on('ready', ready);
-function ready(){
-    console.log("Alright, we are ready!")
-    client.user.setActivity("Drinking Water!💧💦")
-}
+//Executes when the bot is ready.
+client.on('ready', async() => {
+  client.user.setActivity("Drinking Water!💧💦")
+  .then(() => console.log("Alright, im ready!"))
+});
 
-
-
-
-async function main(msg){
-    if (!msg.guild){
-        msg.channel.send('This bot does not respond to DMs.\n Please send your command in a server')
-    }else{
-    if (msg.content.startsWith(prefix)){
-        let args = msg.content.substring(prefix.length).split(' ');
-        switch (args[0]){
-            case 'xp' :
-                CommandHandler.xpGet(msg,database,args);
-            break;
-            case 'check': 
-                CommandHandler.check(msg,database,args,'message');
-            break;
-            case 'joke':
-                CommandHandler.joke(msg,client);
-            case 'meme':
-                CommandHandler.meme(msg,client,Discord);
-            break;
-            case 'role':
-                CommandHandler.role(msg,client);
-            break;
-            default:
-                msg.channel.send("That is not a valid command.")
-
-
-        }
-
+//Executes when a message is sent.
+client.on('message', async message => {
+    if (message.author.bot || message.author === client.user) return; //Returns if a bot sends the message
+    if (!message.guild) return; //Returns if the message isn't sent in a server
+    //imma go read how the db works
+   //there ezpz xd
+    if (db.get(`User${message.author.id}`) === '') {
+        db.set(`User${message.author.id}`);
+        db.push(`User${message.author.id}.messages`, 0);
+        db.push(`User${message.author.id}.xp`, Math.floor(Math.random() * (15 - 10) + 10));
     } else {
-        xp(msg,database);
+        db.add(`User${message.author.id}.messages`, 1);
+        db.add(`User${message.author.id}.xp`,         Math.floor(Math.random() * (15 - 10) + 10));
+    };
 
-        return;
+    if (message.content.toLowerCase().startsWith(prefix)) {
+      try {
+        let name = message.content.slice(prefix.length).split(" ")[0];
+        let command = client.commands.find(x => x.name.toLowerCase() == name.toLowerCase());
+        return command.run(message, client);
+      } catch(err) {
+        console.log(err)
+      }
     }
-}
-}
+});
 
 
-client.on('message', main);
-
-client.login(process.env.TOKEN);
-    
+client.on("guildMemberAdd", member => {
+    try {
+        member.guild.channels.cache
+          .get("779759160220057612")
+          .send(`Welcome ${member.displayName} to ${member.guild.name}`);
+    } catch (e) {
+        console.log(e);
+    }
+});
+//Put functions here.
 
 
