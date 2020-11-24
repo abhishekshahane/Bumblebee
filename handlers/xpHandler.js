@@ -1,17 +1,17 @@
 const { check } = require("./commands")
 const userMethods = require("./users")
 
-exports.xp = function(msg,dictionary){
-if(check(msg,dictionary,null,'check')&& randomNumber(0,3) == 2){
+exports.xp = function(msg,database){
+if(check(msg,database,null,'check')&& randomNumber(0,3) == 2){
    
-    user = finduserinDB(dictionary,msg.author.id);
+    user = finduserinDB(database,msg.author.id);
     
     user.xp += randomNumber(3,7);
 
 
-} else if(!check(msg,dictionary,null,'check')) {
+} else if(!check(msg,database,null,'check')) {
     
-    addUser(msg,dictionary);
+    addUser(msg,database);
     msg.channel.send('Welcome to the Server, '+msg.author.tag);
 }
 }
@@ -19,6 +19,6 @@ if(check(msg,dictionary,null,'check')&& randomNumber(0,3) == 2){
 function randomNumber(min,max){
     return Math.floor((Math.random() * max) + min);
 }
-function addUser(msg,dictionary){
+function addUser(msg,database){
 return userMethods.writeUser(msg.author.id,randomNumber(2,4),msg.guild.id);
 };

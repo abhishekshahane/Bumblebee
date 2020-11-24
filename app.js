@@ -3,7 +3,7 @@
 const Discord = require('discord.js');
 const fetch = require('node-fetch');
 const fs = require('fs');
-const database = require('quick.db');
+
 const dotenv = require('dotenv');
 
 
@@ -15,16 +15,18 @@ const client = new Discord.Client();
 var CommandHandler = require('./handlers/commands');
 const { xp } = require('./handlers/xpHandler');
 
-var dictionary = database.get('main'); 
+var database = fs.readFileSync('./database.json','utf8');
+database = JSON.parse(database);
 
 const prefix = '--';
 
 
 
 function saveDB(){
-      database.set('main.users',dictionary.users);
-      database.set('main.ids',dictionary.ids);
-
+    fs.writeFile('database.json',database, function (err) {
+        if (err) throw err;
+        console.log('Saved db');
+      });
 }
 
 setInterval(saveDB,10000);
@@ -40,17 +42,17 @@ function ready(){
 
 
 async function main(msg){
-    if (!msg.channel.type=='dm'||!msg.guild){
+    if (!msg.guild){
         msg.channel.send('This bot does not respond to DMs.\n Please send your command in a server')
     }else{
     if (msg.content.startsWith(prefix)){
         let args = msg.content.substring(prefix.length).split(' ');
         switch (args[0]){
             case 'xp' :
-                CommandHandler.xpGet(msg,dictionary,args);
+                CommandHandler.xpGet(msg,database,args);
             break;
             case 'check': 
-                CommandHandler.check(msg,dictionary,args,'message');
+                CommandHandler.check(msg,database,args,'message');
             break;
             case 'joke':
                 CommandHandler.joke(msg,client);
@@ -67,7 +69,7 @@ async function main(msg){
         }
 
     } else {
-        xp(msg,dictionary);
+        xp(msg,database);
 
         return;
     }
