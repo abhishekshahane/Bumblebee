@@ -3,7 +3,7 @@ exports.finduserinDB = (database,id) => {
  
  }
 
-exports.writeUser = (id,xp,server)=>{
+exports.writeUser = (id,xp,server,database)=>{
     let user = new userObject(id,xp,server);
     database.users.push(user);
     database.ids.push(id);

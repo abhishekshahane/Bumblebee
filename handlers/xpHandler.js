@@ -20,5 +20,5 @@ function randomNumber(min,max){
     return Math.floor((Math.random() * max) + min);
 }
 function addUser(msg,database){
-return userMethods.writeUser(msg.author.id,randomNumber(2,4),msg.guild.id);
+return userMethods.writeUser(msg.author.id,randomNumber(2,4),msg.guild.id,database);
 };
