@@ -41,7 +41,14 @@ client.on('ready', async() => {
 //Executes when a message is sent.
 client.on('message', async message => {
     if (message.author.bot || message.author === client.user) return; //Returns if a bot sends the message
-    if (!message.guild) return; //Returns if the message isn't sent in a server
+    if (!message.guild){
+      return message.reply({
+        embed:{
+        description:"Sorry, you can't send messages to me!",
+        color: "#FF5733"
+      }
+      })
+    } //Returns if the message isn't sent in a server
     //imma go read how the db works
    //there ezpz xd
     if (db.get(`User${message.author.id}`) === '') {
@@ -75,5 +82,3 @@ client.on("guildMemberAdd", member => {
     }
 });
 //Put functions here.
-
-
