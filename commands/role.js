@@ -74,3 +74,4 @@ function isHexColor (hex) {
       && hex.length === 6
       && !isNaN(Number('0x' + hex))
 }
+
