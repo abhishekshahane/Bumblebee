@@ -4,20 +4,20 @@ const userMethods = require('./users');
 
 const role = require('./role');
 
-exports.check = (msg,dictionary,args,intent) => {
-    userMethods.check(msg,dictionary,args,intent);
+exports.check = (msg,database,args,intent) => {
+    userMethods.check(msg,database,args,intent);
 };
-exports.xpGet = function xp(msg,dictionary, args){
+exports.xpGet = function xp(msg,database, args){
     if(args[1]){
         try {
             
             var mentioned = msg.mentions.users.first().id;
-            let userObject = userMethods.finduserinDB(dictionary,mentioned);
-            if (dictionary.userObject.xp == 0){
+            let userObject = userMethods.finduserinDB(database,mentioned);
+            if (database.userObject.xp == 0){
                 msg.channel.send("This user has not said anything yet, so their XP is 0.")
             }
             else{
-                msg.channel.send(msg.mentions.users.first().tag+"'s xp is: "+dictionary.userObject.xp);
+                msg.channel.send(msg.mentions.users.first().tag+"'s xp is: "+database.userObject.xp);
             }
         } catch (error) {
            if (error){

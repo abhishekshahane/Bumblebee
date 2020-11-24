@@ -1,12 +1,12 @@
-exports.finduserinDB = (dictionary,id) => {
-    return dictionary.users[dictionary.ids.indexOf(id)];
+exports.finduserinDB = (database,id) => {
+    return database.users[database.ids.indexOf(id)];
  
  }
 
 exports.writeUser = (id,xp,server)=>{
     let user = new userObject(id,xp,server);
-    dictionary.users.push(user);
-    dictionary.ids.push(id);
+    database.users.push(user);
+    database.ids.push(id);
     return user;
 }
 
@@ -17,9 +17,9 @@ function userObject(id, xp, server){
     
    } 
 
-exports.check = (msg,dictionary,args,intent) => {
-    if(dictionary.ids.includes(msg.author.id)){
-        let userObject = finduserinDB(dictionary,msg.author.id);
+exports.check = (msg,database,args,intent) => {
+    if(database.ids.includes(msg.author.id)){
+        let userObject = finduserinDB(database,msg.author.id);
         if(intent="message"){
             msg.channel.send('User is in database:');
             msg.channel.send('User xp is '+userObject.xp);
