@@ -1,2 +1,3 @@
 *.jsonc linguist-language=Typescript
 *.json linguist-language=Typescript
+*.yaml linguist-language=Typescript
