@@ -3,10 +3,9 @@ const Discord = require("discord.js");
 const fetch = require("node-fetch");
 const fs = require("fs");
 const db = require("quick.db");
-
 //Set variables here
 var xp = {};
-const prefix = "--";
+const prefix = "!";
 
 const client = new Discord.Client(); //Creates the client.
 
@@ -14,6 +13,7 @@ const client = new Discord.Client(); //Creates the client.
 client.login(`${process.env.TOKEN}`); //Starts the bot.
 
 client.commands = new Discord.Collection(); //Saves the commands in a collection.
+client.aliases = new Discord.Collection();
 
 const commandFiles = fs
   .readdirSync("/app/commands/")
@@ -24,6 +24,11 @@ for (const File of commandFiles) {
   try {
     command = require(`/app/commands/${File}`);
     client.commands.set(command.name, command);
+    if (command.aliases) {
+      command.aliases.forEach(alias => {
+          client.aliases.set(alias, command)
+      })
+    }
     console.log(`${command.name} is ready`);
   } catch (err) {
     console.log(err);
@@ -31,8 +36,7 @@ for (const File of commandFiles) {
 }
 
 //Put events here.
-
-//Executes when the bot is ready.
+//Executes when bot is ready.
 client.on('ready', async() => {
   client.user.setActivity("Drinking Water!💧💦")
   .then(() => console.log("Alright, im ready!"))
@@ -49,24 +53,39 @@ client.on('message', async message => {
       }
       })
     } //Returns if the message isn't sent in a server
-    //imma go read how the db works
-   //there ezpz xd
     if (db.get(`User${message.author.id}`) === '') {
         db.set(`User${message.author.id}`);
         db.push(`User${message.author.id}.messages`, 0);
         db.push(`User${message.author.id}.xp`, Math.floor(Math.random() * (15 - 10) + 10));
+        message.author.send(`Welcome to Bumblebee, ${message.author.username}`)
     } else {
         db.add(`User${message.author.id}.messages`, 1);
         db.add(`User${message.author.id}.xp`,         Math.floor(Math.random() * (15 - 10) + 10));
+        db.add(`User${message.author.id}.level`,         0);
+        let currlev = db.get(`User${message.author.id}.level`)
+        let currxp = db.get(`User${message.author.id}.xp`)
+        let next = currlev+1
+        let XPtoNextLevel = 5 * Math.pow(currlev, 2)+50*currlev+100;
+        if (currxp>=XPtoNextLevel){
+          message.channel.send({
+            embed:{
+              description: `Congrats ${message.author.username}! You've advanced to level ${next}!`,
+              color: [255, 255, 254] //white in RGB
+            }
+          })
+          db.add(`User${message.author.id}.level`, 1)
+        }
     };
 
     if (message.content.toLowerCase().startsWith(prefix)) {
       try {
-        let name = message.content.slice(prefix.length).split(" ")[0];
-        let command = client.commands.find(x => x.name.toLowerCase() == name.toLowerCase());
-        return command.run(message, client);
+        let cmd = message.content.slice(prefix.length).split(" ")[0];
+        let command = client.commands.get(cmd) || client.aliases.get(cmd)
+        let args = message.content.slice(prefix.length).trim().split(/ +/g);
+        let cmd2 = args.shift().toLowerCase();
+        return command.run(message, client, args);
       } catch(err) {
-        console.log(err)
+        console.error(err)
       }
     }
 });
@@ -74,8 +93,7 @@ client.on('message', async message => {
 
 client.on("guildMemberAdd", member => {
     try {
-        member.guild.channels.cache
-          .get("779759160220057612")
+        member.id
           .send(`Welcome ${member.displayName} to ${member.guild.name}`);
     } catch (e) {
         console.log(e);
