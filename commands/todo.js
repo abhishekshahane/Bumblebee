@@ -63,15 +63,17 @@ module.exports={
         allforUser = await db.get(`User${message.author.id}.todo`) 
       }
       console.log(allforUser)
-      let text = "";
+      let text = `${message.author.username}'s Todolist:\n`;
       //lol js isnt like python
       //it kinda is
       for (let i = 0; i < allforUser.length; i++){
+        let next = i+1
+        text+=`${next}. `
         text+=allforUser[i]
         text+='\n'
       }
       
-      if (text===""){
+      if (text===`${message.author.username}'s Todolist:`){
         text = `You don't have any todos, ${message.author.username}! Add one by typing !todo add [TODO].`
       }
       let embed = {
