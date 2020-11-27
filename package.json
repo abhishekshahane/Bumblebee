@@ -12,7 +12,9 @@
   "dependencies": {
     "discord.js": "^12.5.0",
     "dotenv": "^8.2.0",
-    "memejs": "^1.2.3"
+    "memejs": "^1.2.3",
+    "quick.db": "^7.1.2",
+    "random": "^2.2.0"
   },
   "engines": {
     "node": "12.x"
