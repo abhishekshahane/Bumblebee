@@ -3,6 +3,7 @@ const Discord = require("discord.js");
 const fetch = require("node-fetch");
 const fs = require("fs");
 const db = require("quick.db");
+const random = require("random");
 //Set variables here
 var xp = {};
 const prefix = "!";
@@ -60,20 +61,23 @@ client.on('message', async message => {
         message.author.send(`Welcome to Bumblebee, ${message.author.username}`)
     } else {
         db.add(`User${message.author.id}.messages`, 1);
-        db.add(`User${message.author.id}.xp`,         Math.floor(Math.random() * (15 - 10) + 10));
-        db.add(`User${message.author.id}.level`,         0);
+        db.add(`User${message.author.id}.xp`,Math.floor(Math.random() * (15 - 10) + 10));
+        db.add(`User${message.author.id}.level`,0);
+        db.add(`User${message.author.id}.coins`, 0);
         let currlev = db.get(`User${message.author.id}.level`)
         let currxp = db.get(`User${message.author.id}.xp`)
         let next = currlev+1
+        let formulaForNextCoins = Math.pow(currlev, 2)+13%random.int(0, 100)
         let XPtoNextLevel = 5 * Math.pow(currlev, 2)+50*currlev+100;
         if (currxp>=XPtoNextLevel){
           message.channel.send({
             embed:{
-              description: `Congrats ${message.author.username}! You've advanced to level ${next}!`,
+              description: `Congrats ${message.author.username}! You've advanced to level ${next}!\nYou've also recived ${formulaForNextCoins} coins`,
               color: [255, 255, 254] //white in RGB
             }
           })
           db.add(`User${message.author.id}.level`, 1)
+          db.add(`User${message.author.id}.coins`, formulaForNextCoins)
         }
     };
 
