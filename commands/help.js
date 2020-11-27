@@ -1,9 +1,8 @@
 module.exports = {
   name: "help",
-  usage: "!help",
-  aliases: ["commands"],
+  usage: "!help [command]",
   run: async (msg, client) => {
-    let text = "We have several commands, such as:\n"
+    let text = ""
     await client.commands.forEach(command => {
       text += command.name + " "+"usage:"+" " + command.usage +"\n"
     })
