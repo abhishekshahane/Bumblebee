@@ -1,7 +1,7 @@
 {
   "name": "Bumblebee",
   "version": "1.0.0",
-  "description": "",
+  "description": "A multiple use discord bot made with DiscordJS!",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
