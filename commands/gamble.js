@@ -6,19 +6,16 @@ module.exports = {
   name: "gamble",
   usage: "!gamble [amount > 10]",
   run: async (msg, client) => {
-    if (set.has(msg.author.id)){
+    if (set.has(msg.author.id)) {
       let embed = {
-        title: 'Wait for some time before running this command again!',
+        title: "Wait for some time before running this command again!",
         description: "Stop lol don't gamble that much",
-        color: '#ffcccb'
-      }
-      msg.channel.send(
-        {
-          embed: embed
-        }
-      )
-    }
-    else{
+        color: "#ffcccb"
+      };
+      msg.channel.send({
+        embed: embed
+      });
+    } else {
       let args = msg.content.split(" ");
       let f = {
         description:
@@ -64,14 +61,19 @@ module.exports = {
       console.log(newArr);
       let Check = random.int(0, 6);
       let bool = true;
+      let firstOccur = [];
       for (var j = 1; j < newArr.length; j++) {
         if (newArr[j] != Check) {
+          firstOccur.push(newArr[j]);
           bool = false;
           break;
         } else {
           bool = true;
           //same as it was
         }
+      }
+      if (firstOccur === []) {
+        firstOccur[0] = newArr[0];
       }
       if (bool == false) {
         //choose a number between the max and min
@@ -86,6 +88,10 @@ module.exports = {
             {
               name: "You rolled a\n",
               value: `${Check}`
+            },
+            {
+              name: "The computer rolled a\n",
+              value: `${firstOccur[0]}`
             }
           ]
         };
@@ -95,13 +101,34 @@ module.exports = {
         });
       } else {
         let num = random.int(2, parseInt(args[1]));
+        db.subtract(`User${msg.author.id}.coins`, num);
+        let embed1 = {
+          description: `
+              ***YES*** you rolled straight dice so you won ${num} coins. Here are your stats:
+              `,
+          color: "#00FF00",
+          fields: [
+            {
+              name: "You rolled a\n",
+              value: `${Check}`
+            },
+            {
+              name: "The computer rolled a\n",
+              value: `${firstOccur[0]}`
+            }
+          ]
+        };
+        msgtodelete.delete();
+        msg.channel.send({
+          embed: embed1
+        });
+        
       }
-      
     }
-    set.add(msg.author.id)
+    set.add(msg.author.id);
     setTimeout(() => {
-      set.delete(msg.author.id)
-    },5000)
-    
+      set.delete(msg.author.id);
+    }, 5000);
   }
 };
+
