@@ -1,10 +1,10 @@
 # Bumblebee
-A discord bot that counts messages each user has sent. I made this with Nightcry1, MrNNP and Weeyan.
-To run:
-1. Install dependecies such as discord.js and add the bot token.
-2. Add the bot to a server from the link provided in the txt file.
-3. Run `node app.js` to run. It will only start counting messages from the time it is introduced.
-
-If you want to see the results, type `--check`, and it will return data(it counts deleted messages as well). 
-I am also working on features such as levels and XP.
-This is the starting point for something much bigger.
+A discord bot with many commands, such as getting memes, or being productive using a ToDo list. I made this with Nightcry1, MrNNP and Weeyan.
+<br></br>
+We worked on this using Glitch, and the bot is only active on request(will be deployed in a short period), so if you want to see it in action, do contact me.
+<br></br>
+This README will be updated shortly with the full, comprehensive list of commands and their uses(probably when the bot is close to deployment).
+<br></br>
+If you want to add the bot to your server, you can copy-paste the link provided in linkfordiscord.txt. It has tons of fun commands, so you'll never get bored!
+<br></br>
+<b>Thank you for reading this, and have a great day!</b>
