@@ -1,38 +1,39 @@
 var thingsToBuy = [
       {
-        name: "An Apple",
-        price: 50,
-        description: "A single, green apple.",
-        emoji: "🍏",
-        percentageOfGrowth: 10
+        name: "AAPL",
+        price: 30,
+        percentageOfGrowth: "3-9%",
+        emoji: "🗠",
+        maxAmountOfShares: 90
       },
       {
-        name: "Fruit Juice",
-        price: 70,
-        description: "Some nice fruit juice.",
-        emoji: "🧃",
-        percentageOfGrowth: 11
+        name: "ZM",
+        price: 22,
+        percentageOfGrowth: "5-7%",
+        emoji: "🗠",
+        maxAmountOfShares: 70
       }, 
       {
-        name: "Eggs",
-        price: 180,
-        description: "A carton of white eggs.",
-        emoji: "🥚",
-        percentageOfGrowth: 20
+        name: "FB",
+        price: 30,
+        percentageOfGrowth: "3-10%",
+        emoji: "🗠",
+        maxAmountOfShares: 55
       }, 
       {
-        name: "Bread",
-        price: 230,
-        description: "A loaf of brown bread.",
-        emoji: "🍞",
-        percentageOfGrowth: 21
+        name: "TSLA",
+        price: 40,
+        percentageOfGrowth: "7-9%",
+        emoji: "🗠",
+        maxAmountOfShares: 60
       },
       {
-        name: "Fish",
-        price: 300,
-        description: "A fresh-water fish, best enjoyed roasted",
-        emoji: "🐟",
-        percentageOfGrowth: 30
+        name: "GOOGL",
+        price: 25,
+        percentageOfGrowth: "4-5%",
+        emoji: "🗠",
+        maxAmountOfShares: 80
+        
       }
 ];
 module.exports = {
