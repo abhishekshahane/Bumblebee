@@ -15,7 +15,18 @@ module.exports = {
       msg.channel.send({
         embed: embed
       });
-    } else {
+    
+    }
+    else if(parseInt(msg.content.split(" ")[1]) >= db.get(`User${msg.author.id}.coins`)){
+      let embed = {
+        color: "#FF0000",
+        description: "Nice try, but you can't gamble away more than or equal to what you have."
+      }
+      msg.channel.send({
+        embed: embed
+      })
+    }
+    else {
       let args = msg.content.split(" ");
       let f = {
         description:
@@ -106,7 +117,7 @@ module.exports = {
           description: `
               ***YES*** you rolled straight dice so you won ${num} coins. Here are your stats:
               `,
-          color: "#00FF00",
+          color: "#FF0000",
           fields: [
             {
               name: "You rolled a\n",
