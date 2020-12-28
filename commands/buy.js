@@ -34,6 +34,7 @@ module.exports = {
       if (typeof strsplit[1] === 'string' && list.includes(strsplit[1])){
         for (var j=0;j<shop.length;j++){
           if (shop[j]["name"]===strsplit[1]){
+            var name = shop[j]["name"]
             var maxShares = shop[j]["maxAmountOfShares"]
             var price = shop[j]["price"]
             var percentageGrowth = shop[j]["percentageOfGrowth"]
@@ -42,9 +43,21 @@ module.exports = {
         //to debug uncomment the comment below
         //console.log(maxShares, price, percentageGrowth)
         //these two if statements represent the conditions
-        if (!isNaN(strsplit[2]) && parseInt(strsplit[2])<=maxShares && money>maxShares*price && strsplit[2].search('.')===-1){
-          //code here
-          console.log(strsplit[2])
+        //console.log(isNaN(strsplit[2]), parseInt(strsplit[2])<=maxShares, money>maxShares*price, strsplit[2].search('\\.')===-1)
+        if (!isNaN(strsplit[2]) && parseInt(strsplit[2])<=maxShares && money>maxShares*price && strsplit[2].search('\\.')===-1){
+          //then, we check if a arr is made
+          let arr = db.get(`User${msg.author.id}.stocks`, [])
+          if (!arr){
+            await db.set(`User${msg.author.id}.stocks`,[])
+            arr = db.get(`User${msg.author.id}.stocks`)
+          }
+          var str = "";
+          str=str+strsplit[1]+" "
+          str+=strsplit[2]
+          arr.push(str)
+          db.set(`User${msg.author.id}.stocks`, arr)
+          console.log(arr)
+          
         }
         
         else{
