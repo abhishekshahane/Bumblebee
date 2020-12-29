@@ -3,7 +3,7 @@ const imports = require('../consts/constants.js')
 module.exports = {
   name: "buy",
   usage: "!buy [stock symbol] [shares]",
-  run: async(msg, client) => {
+  run: async function(msg, client){
     //Just console logs atm, will work on this later
     var strsplit = msg.content.split(" ")
     var shop = imports.thingsToBuy
@@ -43,6 +43,7 @@ module.exports = {
         //to debug uncomment the comment below
         //console.log(maxShares, price, percentageGrowth)
         //these two if statements represent the conditions
+        //for debugging
         //console.log(isNaN(strsplit[2]), parseInt(strsplit[2])<=maxShares, money>maxShares*price, strsplit[2].search('\\.')===-1)
         if (!isNaN(strsplit[2]) && parseInt(strsplit[2])<=maxShares && money>maxShares*price && strsplit[2].search('\\.')===-1){
           //then, we check if a arr is made
@@ -53,10 +54,35 @@ module.exports = {
           }
           var str = "";
           str=str+strsplit[1]+" "
-          str+=strsplit[2]
+          str+=strsplit[2] + " "
+          const t = Date.now()
+          str+=t
           arr.push(str)
           db.set(`User${msg.author.id}.stocks`, arr)
-          console.log(arr)
+          let embed = {
+            color: "#00FFFF",
+            description: "Stock bought!"
+          }
+          msg.channel.send({
+            embed: embed
+          })
+          //then, we need to check if it's been a week later, in the case that we remove the user's stock from the db, so
+          //settimeout will work
+          setTimeout(() => {
+            var ar = db.get(`User${msg.author.id}.stocks`)
+            var new_arr = [];
+            for (var i=0;i<ar.length;i++){
+              if (parseInt(ar[i].split(" ")[2]) - t>=6.048e+8){}
+              else{
+                new_arr.push(ar[i])
+              }
+            }
+            //console.log('Your stocks are dissapearing lol')
+            db.set(`User${msg.author.id}.stocks`, new_arr)
+          }, 6.048e+8)
+          
+          
+          
           
         }
         
