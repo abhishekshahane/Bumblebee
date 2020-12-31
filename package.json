@@ -1,6 +1,6 @@
 {
   "name": "Bumblebee",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A multiple use discord bot made with DiscordJS!",
   "main": "app.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Abhishek Shahane",
-  "license": "",
+  "license": "None",
   "dependencies": {
     "discord.js": "^12.5.0",
     "dotenv": "^8.2.0",
