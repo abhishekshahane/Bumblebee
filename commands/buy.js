@@ -77,15 +77,19 @@ module.exports = {
                 new_arr.push(ar[i])
               }
             }
-            //console.log('Your stocks are dissapearing lol')
+            
             db.set(`User${msg.author.id}.stocks`, new_arr)
+            let embed={
+              color: "#FF0000",
+              description: `${msg.author.username}, unfortunately, you didn't utilise your stocks, so they've disappeared. You can always get more from the store though.`
+            }
+            msg.channel.send(embed)
           }, 6.048e+8)
           
           
           
           
         }
-        
         else{
           let embed = {
             color: "#FF0000",
