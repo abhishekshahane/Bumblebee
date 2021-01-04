@@ -8,13 +8,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Abhishek Shahane",
-  "license": "None",
+  "license": "",
   "dependencies": {
     "discord.js": "^12.5.0",
     "dotenv": "^8.2.0",
     "memejs": "^1.2.3",
     "quick.db": "^7.1.2",
-    "random": "^2.2.0"
+    "random": "^2.2.0",
+    "better-sqlite3": "^7.1.2"
   },
   "engines": {
     "node": "12.x"
