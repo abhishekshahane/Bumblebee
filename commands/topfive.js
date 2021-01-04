@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 module.exports = {
   name: "topfive",
   usage: "!topfive",
+  description: "Get the top 5 people with the highest xp in your server!",
   aliases: ["top", "leaderboard", "lb"],
   run: async (msg, client) => {
     let all = db.all() //grab everything in the db
@@ -13,7 +14,7 @@ module.exports = {
       //push only necessary objects from the db into a different array
       xpUsers.push(user)
     })
-    await xpUsers.sort((a, b) => a.xp - b.xp); // sort from highest xp to lowest xp
+    await xpUsers.sort((a, b) => a .xp - b.xp); // sort from highest xp to lowest xp
     let embed = new Discord.MessageEmbed() //create embed
     .setTitle("TOP FIVE")
     .setColor("#00FF00")
@@ -37,3 +38,4 @@ module.exports = {
     }
   }
 }
+
