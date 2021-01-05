@@ -1,11 +1,13 @@
 const db = require('quick.db')
 module.exports = {
   name: "level",
+  description: "Get your current level with this!",
+  usage: "!level [@user]",
   run: async(msg, client) => { 
     let strsplit = msg.content.split(" ")
     if (strsplit.length === 1){
       msg.channel.send({embed: {
-        description: "Oops, please follow the format --level [@USER]",
+        description: "Oops, please follow the format !level [@USER]",
         color: "#008000"
       }})
     }
