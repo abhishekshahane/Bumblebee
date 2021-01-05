@@ -5,6 +5,7 @@ const set = new Set();
 module.exports = {
   name: "gamble",
   usage: "!gamble [amount > 10]",
+  description: "Gamble using this command!",
   run: async (msg, client) => {
     if (set.has(msg.author.id)) {
       let embed = {
@@ -142,4 +143,3 @@ module.exports = {
     }, 5000);
   }
 };
-
