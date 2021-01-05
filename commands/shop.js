@@ -3,6 +3,7 @@ var imports = require('../consts/constants.js')
 module.exports = {
   name: "shop",
   usage: "!shop", 
+  description: "Look at the shop using this command!",
   run: async(message, client) => {
       var second = imports.thingsToBuy
     
