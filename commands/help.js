@@ -1,11 +1,11 @@
 module.exports = {
   name: "help",
-  usage: "!help",
-  aliases: ["commands"],
+  usage: "!help [command]",
+  description: "Get help with this!",
   run: async (msg, client) => {
-    let text = "We have several commands, such as:\n"
+    let text = ""
     await client.commands.forEach(command => {
-      text += command.name + " "+"usage:"+" " + command.usage +"\n"
+      text += command.name + " "+"\n\tusage:"+" " + command.usage +"\n" + "\n\tdescription" + command.description
     })
     let embed = {
       title: "HELP",
