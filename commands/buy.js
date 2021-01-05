@@ -2,6 +2,7 @@ const db = require('quick.db')
 const imports = require('../consts/constants.js')
 module.exports = {
   name: "buy",
+  description: "Buy stocks with this!",
   usage: "!buy [stock symbol] [shares]",
   run: async function(msg, client){
     //Just console logs atm, will work on this later
