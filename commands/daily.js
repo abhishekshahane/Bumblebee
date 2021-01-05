@@ -5,6 +5,7 @@ const random = require("random");
 module.exports = {
   name: "daily",
   usage: "!daily",
+  description: "Get your daily coins using this!",
   run: async (msg, client) => {
     if (alreadyClaimed.has(msg.author.id))
       return msg.channel.send("already claimed daily lol."); //if already claimed daily
@@ -15,7 +16,7 @@ module.exports = {
     alreadyClaimed.add(msg.author.id); // add user to the Set
     setTimeout(() => {
       alreadyClaimed.delete(msg.author.id); //after 24hrs remove user from Set
-    }, 8.64e7);
+    }, 8.64e+7);
   }
 };
 
