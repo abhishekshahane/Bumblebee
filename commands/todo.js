@@ -3,6 +3,7 @@ const db = require('quick.db')//we'll need quick.db
 module.exports={
   name: "todo",
   usage: "!todo add [STUFF] or !todo delete [number of the todo] or !todo",
+  description: "Stay productive with this!",
   run: async(message, client) => {
     //so first, we need to add this in the db
     //done, now for checking what the args is 
