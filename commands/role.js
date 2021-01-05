@@ -1,5 +1,7 @@
 module.exports = {
   name: "role",
+  description: "Change roles with this!",
+  usage: "!role [@user] [@color] [@role name]",
   run: (message, client) => {
     let toGive = message.mentions.members.first()
     if (!message.member.hasPermission('MANAGE_ROLES')) {
@@ -21,10 +23,11 @@ module.exports = {
       }})
     }
     let args = message.content.split(' ').slice(1)
+    let name = message.content.split(' ').slice(3).join(' ')
     console.log(args)
     if (args[0] != `<@!${toGive.id}>`) {
       return message.channel.send({embed: {
-        description: "The correct format is `--role @USER [role name] [Color]`",
+        description: "The correct format is `!role @USER [role name] [Color]`",
         color: "FF0000"
       }})
     }
@@ -34,7 +37,7 @@ module.exports = {
         color: "FF0000"
       }})
     }
-    if (!args[2]) {
+    if (!name) {
       return message.channel.send({embed: {
         description: "Please provide a name for the role!",
         color: "FF0000"
@@ -42,13 +45,13 @@ module.exports = {
     }
     message.guild.roles.create({
       data: {
-        name: args[2],
+        name: name,
         color: args[1]
       }
     }).then(r => {
       toGive.roles.add(r).then(member => {
         return message.channel.send({embed: {
-          description: `Successfully gave <@${r.id}> to <@${member.id}>`,
+          description: `Successfully gave ${r} to <@${member.id}>`,
           color: "00FF00"
         }})
       }).catch(e => {
