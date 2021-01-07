@@ -5,7 +5,7 @@ module.exports = {
   run: async (msg, client) => {
     let text = ""
     await client.commands.forEach(command => {
-      text += command.name + " "+"\n\tusage:"+" " + command.usage +"\n" + "\n\tdescription" + command.description
+      text += `***${command.name}:***` + "\n"+"\n\tusage:"+" " + command.usage +"\n" + "\n\tdescription: " + command.description + "\n\n"
     })
     let embed = {
       title: "HELP",
