@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 
 module.exports = {
   name: "meme",
+  description: "Get memes with this!",
   usage:"!meme",
   run: async (msg, client) => {
     let m = await msg.channel.send("Retreiving meme....")

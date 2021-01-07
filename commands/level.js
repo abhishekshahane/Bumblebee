@@ -1,6 +1,7 @@
 const db = require('quick.db')
 module.exports = {
   name: "level",
+  description: "Get your current level with this!",
   usage: "!level [@user]",
   run: async(msg, client) => { 
     let strsplit = msg.content.split(" ")

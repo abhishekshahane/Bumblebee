@@ -3,6 +3,7 @@ const db = require('quick.db');
 module.exports = {
   name: "xp",
   usage: "!xp [@user]",
+  description: "Get your xp points from this command!",
   run: async (msg, client) => {
     let user = msg.mentions.users.first()
     let person = msg.author.username;

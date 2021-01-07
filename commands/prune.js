@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 //Keep in mind that the bot has to have admin perms for this to work!
 module.exports = {
     name: "prune",
+    description: "Delete messages with this!",
     usage: "!purge [integer n such that n>1 and n<100]",
     aliases: ["purge", "bulkdelete"],
     run: async (message, client, args) => {

@@ -1,5 +1,6 @@
 module.exports = {
   name: "role",
+  description: "Change roles with this!",
   usage: "!role [@user] [@color] [@role name]",
   run: (message, client) => {
     let toGive = message.mentions.members.first()
