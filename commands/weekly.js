@@ -1,12 +1,19 @@
 const db = require('quick.db')
 const imports = require('../consts/constants.js')
 const random = require('random')
+function sum(arr){
+  var sum=0;
+  for (var i=0;i<arr.length;i++){
+    sum+=arr[i]
+  }
+  return sum
+}
 module.exports = {
   name: "weekly",
   usage: "!weekly",
   description: "Redeem money from your weekly stock purchases!",
   run: async function(msg, client){
-    //we need to get this to work first, discord error or smth
+
     var strsplit = msg.content.split(" ")
     if (strsplit.length===1){
       let a = db.get(`User${msg.author.id}.stocks`)
@@ -31,13 +38,24 @@ module.exports = {
         console.log(userStocks)
         for (var i=0;i<userStocks.length;i++){
           var splitit = userStocks[i].split(" ")
+          var moneygot = parseInt(splitit[1])*dict[splitit[0]][0];
           var percents = dict[splitit[0]]
           var final = percents[1].split("-")
           var randoms = [parseInt(final[0]), parseInt(final[1])]
           var randomInt = random.int(randoms[0], randoms[1])
-          console.log(randomInt)
+          price.push((randomInt/100)*moneygot)
        
-       }
+        }
+        var ans = Math.round(sum(price))
+        db.set(`User${msg.author.id}.coins`, ans)
+        let embed = {
+          description: `${ans} coins were just added to your account, ${msg.author.username}!`,
+          color: "#00FFFF"
+        }
+        msg.channel.send({
+          embed:embed
+        })
+        
       }
     }
     
