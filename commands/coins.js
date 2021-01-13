@@ -11,7 +11,7 @@ module.exports = {
       let coins = Math.floor(db.get(`User${getcoins}.coins`));
       var embed = {
         color: "#fafafa",
-        description: `You have ${coins}, ${a}!`
+        description: `You have ${coins} coins, ${a}!`
       };
       return msg.channel.send({
         embed: embed
