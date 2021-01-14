@@ -74,6 +74,11 @@ client.on("message", async message => {
     let currxp = db.get(`User${message.author.id}.xp`);
     let next = currlev + 1;
     let formulaForNextCoins = Math.pow(currlev, 2) + (13 % random.int(0, 100));
+    //checker for formula
+    //if it is not a num, make the var 200
+    if (isNaN(formulaForNextCoins)) {
+      formulaForNextCoins = 200;
+    }
     let XPtoNextLevel = 5 * Math.pow(currlev, 2) + 50 * currlev + 100;
     if (currxp >= XPtoNextLevel) {
       message.channel.send({
@@ -111,3 +116,4 @@ client.on("guildMemberAdd", member => {
   }
 });
 //Put functions here.
+
