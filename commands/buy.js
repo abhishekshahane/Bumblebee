@@ -45,8 +45,8 @@ module.exports = {
         //console.log(maxShares, price, percentageGrowth)
         //these two if statements represent the conditions
         //for debugging
-        //console.log(isNaN(strsplit[2]), parseInt(strsplit[2])<=maxShares, money>maxShares*price, strsplit[2].search('\\.')===-1)
-        if (!isNaN(strsplit[2]) && parseInt(strsplit[2])<=maxShares && money>maxShares*price && strsplit[2].search('\\.')===-1){
+        console.log(isNaN(strsplit[2]), parseInt(strsplit[2])<=maxShares, money>price*parseInt(strsplit[2]), strsplit[2].search('\\.')===-1)
+        if (!isNaN(strsplit[2]) && parseInt(strsplit[2])<=maxShares && money>price*parseInt(strsplit[2]) && strsplit[2].search('\\.')===-1){
           //then, we check if a arr is made
           let arr = db.get(`User${msg.author.id}.stocks`, [])
           if (!arr){

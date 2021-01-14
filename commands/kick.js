@@ -9,7 +9,7 @@ module.exports = {
       const member = message.guild.member(user);
       if (member) {
         member
-          .kick('Optional reason that will display in the audit logs')
+          .kick()
           .then(() => {
             message.reply(`Successfully kicked ${user.tag}`);
           })
