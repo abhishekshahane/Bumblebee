@@ -16,6 +16,8 @@ joke: [usage: !joke, description: Get a funny joke with this!]
 
 kick: [usage: !kick [member], description: kick a member from your server.]
 
+stocks: [usage: !stocks, description: See all your current stocks!]
+
 level: [usage: !level [@user], description: Get your current level with this!]
 
 meme: [usage: !meme, description: Get memes with this!]
