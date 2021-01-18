@@ -2,9 +2,7 @@
 
 A discord bot with many commands, such as getting memes, or being productive using a ToDo list. I made this with Nightcry1, MrNNP and Weeyan.
 <br>
-<br>
 We worked on this using Glitch, and the bot is only active on request(will be deployed in a short period), so if you want to see it in action, do contact me.
-<br>
 <br>
 If you want to add the bot to your server, you can copy-paste the link provided in linkfordiscord.txt. It has tons of fun commands, so you'll never get bored!
 <br>
@@ -13,7 +11,6 @@ Below, you can find the commands in key-value pairs.
 <br>
 
 ```
-
 buy: [usage: !buy [stock symbol] [shares], description: Buy stocks with this!]
 
 check: [usage: !check [@user], description: Check how many messages someone has sent on the server with this!]
@@ -31,6 +28,8 @@ help: [usage: !help [command], description: Get help with this!]
 joke: [usage: !joke, description: Get a funny joke with this!]
 
 kick: [usage: !kick [member], description: kick a member from your server.]
+
+stocks: [usage: !stocks, description: See all your current stocks!]
 
 level: [usage: !level [@user], description: Get your current level with this!]
 
@@ -51,6 +50,5 @@ weekly: [usage: !weekly, description: Redeem money from your weekly stock purcha
 xp: [usage: !xp [@user], description: Get your xp points from this command!]
 ```
 
-<br>
 <br>
 <b>Thank you for reading this, and have a great day!</b>
