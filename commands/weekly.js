@@ -55,10 +55,10 @@ module.exports = {
         msg.channel.send({
           embed:embed
         })
+        db.set(`User${msg.author.id}.stocks`, [])
         
       }
     }
     
   }
 }
-
