@@ -1,5 +1,8 @@
 # Bumblebee
+<br>
 
+<b><i>IMPORTANT: The main project, as of now, is marked as complete. However, you can still make pull requests, and I will review them.</i></b>
+<br>
 A discord bot with many commands, such as getting memes, or being productive using a ToDo list. I made this with Nightcry1, MrNNP and Weeyan.
 <br>
 We worked on this using Glitch, and the bot is only active on request(will be deployed in a short period), so if you want to see it in action, do contact me.
@@ -51,6 +54,5 @@ xp: [usage: !xp [@user], description: Get your xp points from this command!]
 ```
 
 <br>
-<b><i>IMPORTANT: The main project, as of now, is marked as complete. However, you can still make pull requests, and I will review them.</i></b>
 <br>
 <b>Thank you for reading this, and have a great day!</b>
