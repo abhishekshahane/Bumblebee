@@ -51,5 +51,6 @@ xp: [usage: !xp [@user], description: Get your xp points from this command!]
 ```
 
 <br>
-<b>IMPORTANT: The main project, as of now, is marked as complete. However, you can still make pull requests, and I will review them.</b>
+<b><i>IMPORTANT: The main project, as of now, is marked as complete. However, you can still make pull requests, and I will review them.</i></b>
+<br>
 <b>Thank you for reading this, and have a great day!</b>
