@@ -10,7 +10,7 @@ module.exports = {
     if (alreadyClaimed.has(msg.author.id))
       return msg.channel.send("already claimed daily lol."); //if already claimed daily
     let coins = db.get(`User${msg.author.id}.coins`); // get user's balance
-    let amt = Math.floor((1 / random.int(20, 35)) * coins); //amount of coins to give
+    let amt = random.int(100, 400); //amount of coins to give
     await db.add(`User${msg.author.id}.coins`, amt); // add amount to balance
     msg.channel.send("Nice, you got " + amt + ` coins ${msg.author.username}!`); // send confirmation message
     alreadyClaimed.add(msg.author.id); // add user to the Set
