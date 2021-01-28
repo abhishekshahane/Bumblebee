@@ -26,6 +26,6 @@ module.exports = {
     }
     //first mention
     let messagesSent = db.get(`User${firstMentionID}.messages`);
-    msg.channel.send(messagesSent);
+    msg.channel.send(`You've sent ${messagesSent} messages.`);
   }
 };
