@@ -10,7 +10,7 @@ const prefix = "!";
 
 const client = new Discord.Client(); //Creates the client.
 
-client.login("Nzc3Nzc5MjcyOTk4NzE1NDEz.X7IZZQ.Vm0lDiDYyP9-0dzXbg5o_WRw85o"); //Starts the bot.
+client.login(""); //Starts the bot.
 
 client.commands = new Discord.Collection(); //Saves the commands in a collection.
 client.aliases = new Discord.Collection();
