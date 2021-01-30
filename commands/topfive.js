@@ -29,13 +29,14 @@ module.exports = {
     
     function getUser(num) {
       let userid = xpUsers[num - 1].ID.split("User")[1] //get a user's id from the db
-      let name = client.users.cache.get(userid) //find it in the bot
+      let name = msg.guild.members.cache.get(userid) //find it in the bot
       if (!name) {
         return "Someone unknown to us!"; //if cant find the user, name will be "Unknown"
       } else {
-        return name.username; // if it can, it will be the original user's name
+        return name.user.username; // if it can, it will be the original user's name
       }
     }
   }
 }
+
 
