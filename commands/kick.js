@@ -5,6 +5,12 @@ module.exports = {
   usage: "!kick [member]",
   run: async (message, client) => {
      const user = message.mentions.users.first();
+    if (!message.member.hasPermission(["MANAGE_MESSAGES", "ADMINISTRATOR"])){
+      msg.channel.send({
+        description:"Sorry, you can't use that.",
+        color: "#FAFAFA"
+      })
+    }
     if (user) {
       const member = message.guild.member(user);
       if (member) {
