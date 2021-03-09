@@ -8,6 +8,7 @@ module.exports = {
   aliases: ["top", "leaderboard", "lb"],
   run: async (msg, client) => {
     let all = db.all(); //grab everything in the db
+    console.log(all)
     let xpUsers = [];
     await all.forEach(user => {
       if (!user.ID.startsWith("User")) return;
