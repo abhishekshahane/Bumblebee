@@ -1,7 +1,7 @@
 # Bumblebee
 <br>
 
-<b><i>IMPORTANT: The main project, as of now, is marked as complete. However, you can still make pull requests, and I will review them.</i></b>
+<b><i>IMPORTANT: The main project, as of now, is marked as complete. However, you can still make pull requests, and I will review them. Also, this bot is buggy, so please do bring bugs to my notice. Furthermore, some of these might be caused by Heroku's free hosting service(which I am using for this), and hence these are not in my control.</i></b>
 <br>
 A discord bot with many commands, such as getting memes, or being productive using a ToDo list. I made this with Nightcry1, MrNNP and Weeyan.
 <br>
