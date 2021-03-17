@@ -4,13 +4,14 @@ const fetch = require("node-fetch");
 const fs = require("fs");
 const db = require("quick.db");
 const random = require("random");
+require('dotenv').config()
 //Set variables here
 var xp = {};
 const prefix = "!";
 
 const client = new Discord.Client(); //Creates the client.
 
-client.login(""); //Starts the bot.
+client.login(process.env.TOKEN); //Starts the bot.
 
 client.commands = new Discord.Collection(); //Saves the commands in a collection.
 client.aliases = new Discord.Collection();
@@ -50,7 +51,10 @@ client.on("message", async message => {
   if (message.guild){
     if (db.get(`User${message.author.id}`) === "") {
       db.set(`User${message.author.id}`);
+      db.set(`Guild${message.guild.id}`);
       db.push(`User${message.author.id}.messages`, 0);
+      db.push(`Guild{message.guild.id}.settingsupdates`, false)
+      console.log(`Guild${message.guild.id}`)
       db.push(
         `User${message.author.id}.xp`,
         Math.floor(Math.random() * (15 - 10) + 10)
@@ -67,7 +71,7 @@ client.on("message", async message => {
       let currlev = db.get(`User${message.author.id}.level`);
       let currxp = db.get(`User${message.author.id}.xp`);
       let next = currlev + 1;
-      let formulaForNextCoins = Math.pow(currlev, 2) + (13 % random.int(0, 100));
+      let formulaForNextCoins = next*10+(random.int(2, 300))
       //checker for formula
       //if it is not a num, make the var 200
       if (isNaN(formulaForNextCoins)) {
@@ -75,14 +79,24 @@ client.on("message", async message => {
       }
       let XPtoNextLevel = 5 * Math.pow(currlev, 2) + 50 * currlev + 100;
       if (currxp >= XPtoNextLevel) {
-        message.channel.send({
-          embed: {
-            description: `Congrats ${message.author.username}! You've advanced to level ${next}!\nYou've also received ${formulaForNextCoins} coins`,
-            color: [255, 255, 254] //white in RGB
-          }
-        });
-        db.add(`User${message.author.id}.level`, 1);
-        db.add(`User${message.author.id}.coins`, formulaForNextCoins);
+        var bool = db.get(`Guild{message.guild.id}.settingsupdates`);
+        if(bool === true){
+          console.log(db.get(`Guild{message.guild.id}.settingsupdates`))
+          message.channel.send({
+            embed: {
+              description: `Congrats ${message.author.username}! You've advanced to level ${next}!\nYou've also received ${formulaForNextCoins} coins`,
+              color: [255, 255, 254] //white in RGB
+            }
+          });
+          db.add(`User${message.author.id}.level`, 1);
+          db.add(`User${message.author.id}.coins`, formulaForNextCoins);
+          console.log(typeof(bool))
+        }
+        else{
+          db.add(`User${message.author.id}.level`, 1);
+          db.add(`User${message.author.id}.coins`, formulaForNextCoins);
+          console.log(typeof(bool))
+        }
       }
     }
   }
