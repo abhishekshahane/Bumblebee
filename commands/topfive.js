@@ -11,17 +11,21 @@ module.exports = {
     console.log(all)
     let xpUsers = [];
     await all.forEach(user => {
-      if (!user.ID.startsWith("User")) return;
+      if (!user.ID.startsWith("User")) {}
       //push only necessary objects from the db into a different array
-      xpUsers.push(user);
+      else{
+        xpUsers.push(user);
+      }
     });
+    console.log(xpUsers)
     await xpUsers.sort((a, b) => a.xp - b.xp); // sort from highest xp to lowest xp
     let embed = new Discord.MessageEmbed() //create embed
       .setTitle("TOP FIVE")
       .setColor("#00FF00");
     let i = 0; //index number
     await xpUsers.forEach(xp => {
-      if (getUser(i + 1) != "Someone unknown to us!") {
+      //limits to 5
+      if (getUser(i + 1) != "Someone unknown to us!" && i<=5) {
         i++;
         embed.addField(
           `${i}. ${getUser(i)}`,
@@ -42,5 +46,3 @@ module.exports = {
     }
   }
 };
-
-
